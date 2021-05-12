@@ -1,0 +1,72 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.22.5/libexec/bin/yarn.js add grapql-upload
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/usr/local/go/bin:/opt/X11/bin:/Library/Apple/usr/bin:/Users/sreejithputhenveettil/Library/Android/sdk/emulator:/Users/sreejithputhenveettil/Library/Android/sdk/tools:/Users/sreejithputhenveettil/Library/Android/sdk/tools/bin:/Users/sreejithputhenveettil/Library/Android/sdk/platform-tools
+
+Yarn version: 
+  1.22.5
+
+Node version: 
+  12.18.3
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/grapql-upload: Not found
+      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.22.5/libexec/lib/cli.js:66988:18)
+      at Request.self.callback (/usr/local/Cellar/yarn/1.22.5/libexec/lib/cli.js:140749:22)
+      at Request.emit (events.js:315:20)
+      at Request.<anonymous> (/usr/local/Cellar/yarn/1.22.5/libexec/lib/cli.js:141721:10)
+      at Request.emit (events.js:315:20)
+      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.22.5/libexec/lib/cli.js:141643:12)
+      at Object.onceWrapper (events.js:421:28)
+      at IncomingMessage.emit (events.js:327:22)
+      at endReadableNT (_stream_readable.js:1220:12)
+      at processTicksAndRejections (internal/process/task_queues.js:84:21)
+
+npm manifest: 
+  {
+    "name": "projectstart",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+      "start": "nodemon app.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "bcryptjs": "^2.4.3",
+      "body-parser": "^1.19.0",
+      "cookie-parser": "^1.4.5",
+      "cors": "^2.8.5",
+      "express": "^4.17.1",
+      "express-handlebars": "^5.2.0",
+      "express-session": "^1.17.1",
+      "express-validator": "^6.6.1",
+      "jsonwebtoken": "^8.5.1",
+      "express-graphql": "^0.6.11",
+      "mongoose": "^5.10.13",
+      "passport": "^0.4.1",
+      "passport-local": "^1.0.0",
+      "apollo-server": "^2.18.2",
+      "apollo-server-express": "^2.18.2",
+      "cloudinary": "^1.23.0",
+      "dotenv": "^8.2.0",
+      "esm": "^3.2.25",
+      "graphql": "^15.3.0",
+      "graphql-tools": "^6.2.4",
+      "nodemailer": "^6.4.13",
+      "subscriptions-transport-ws": "^0.9.18",
+      "uuid": "^8.3.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
