@@ -20,7 +20,7 @@ import { onError } from "@apollo/client/link/error";
 
 
 const httpLink = createUploadLink({
-  uri: 'https://radiant-harbor-07728.herokuapp.com/graphql', // Apollo Server is served from port 4000
+  uri: 'http://localhost:4000/graphql', // Apollo Server is served from port 4000
 });
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists

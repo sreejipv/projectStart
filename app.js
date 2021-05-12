@@ -22,6 +22,7 @@ const server = new ApolloServer({
 });
 
 const app = express();
+const PORT  = process.env.PORT || 4000;
 server.applyMiddleware({app});
 app.use(express.static('public'));
 app.use(bodyParser.json());
@@ -37,12 +38,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 require("./passportConfig")(passport);
 console.log(MONGODB, '....')
+console.log(process.env.PORT);
 
 mongoose
   .connect(MONGODB, { useNewUrlParser: true })
   .then(() => {
     console.log('MongoDB Connected');
-    return app.listen({ port: 4000 },() => console.log('boooooom'));
+    return app.listen(PORT ,() => console.log('boooooom'));
   })
   .then((res) => {
     console.log(`Server running at ${res.url}`);
