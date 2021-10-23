@@ -22,7 +22,6 @@ const Landing = props => {
           history.push(Routes.HOME);
         }
         if(error) {
-          alert('error biaatchhhh')
           console.log(error);
         }
       }, [error, isAuthenticated]);

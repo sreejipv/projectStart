@@ -1,6 +1,9 @@
 import React from "react";
 import { useMutation, ApolloProvider } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import Banner from './Banner.js'
+import TopHeader from "../TopHeader/index.js";
+import { Box } from "@material-ui/core";
 const UPLOAD_FILE = gql`
  mutation uploadFile($file: Upload!){
    uploadFile(file: $file){
@@ -20,7 +23,18 @@ const Profile = client => {
     };
   return (
     <div>
-      <input type="file" required onChange={upload} />;
+      {/* <input type="file" required onChange={upload} />; */}
+      <TopHeader/>
+      <Banner businessName="Aura Cup" 
+        businessDesc="Start the right acquisition conversations at your own pace. 
+        Get free and instant access to 30,000+ 
+        trusted buyers with total anonymity. 
+        Say goodbye to brokers and meet your ideal buyer today."/>
+        
+        <Box textAlign="center">
+          <p>Powered by</p>
+          <p>MABUZ</p>
+        </Box>
     </div>
   );
 };

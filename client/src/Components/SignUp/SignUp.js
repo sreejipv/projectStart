@@ -33,7 +33,7 @@ function SignUp(props) {
       try{
         // const response = await signup({variables: {email: "koqqqqq@gmail.com",password: "qweqwe123"}})
         const response = await signup({variables: {input: {name: "ramasasan",
-        email: "kmmmmmmoo@gmail.com",
+        email: "k@gmail.com",
         mobile: "9898989898",
         password: "qweqwe123",
         confirmPassword: "qweqwe123"}}});

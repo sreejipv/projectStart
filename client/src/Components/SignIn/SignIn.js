@@ -33,8 +33,8 @@ function SignIn(props) {
 
     // const [error, setError] = useState('');
     const [values, setValues] = useState({
-      email: '',
-      password: ''
+      email: 'Gopaal@lgopal.in',
+      password: 'asdqwecxccqwe'
     })
 
     // const [signin, { data }] = useMutation(LOG_IN); 
@@ -43,11 +43,13 @@ function SignIn(props) {
 
     const handleSubmit = async(e) => {
       e.preventDefault();
-      if(email === "" || password === "") {
-        alert('fill it bitchh');
-      }else {
-        login({email: "koqqqqq@gmail.com",password: "qweqwe123"});
-      }
+      login({email: email,password: password});
+
+      // if(email === "" || password === "") {
+      //   alert('fill it bitchh');
+      // }else {
+      //   login({email: email,password: password});
+      // }
       // try{
       //   const response = await signin({variables: {email: "koqqqqq@gmail.com",password: "qweqwe123"}})
       //   // const response = await signup({variables: {input: {name: "ramasasan",
@@ -72,8 +74,6 @@ function SignIn(props) {
 
     // console.log(email);
     function changeHandler(e) {
-      console.log(email, password);
-
       const { name, value } = e.target;
       setValues({ ...values, [name]: value });
     }

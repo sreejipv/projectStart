@@ -1,24 +1,15 @@
-const mongoose = require('mongoose')
-const express = require('express');
-const router = express.Router()
-const alienSchema = new mongoose.Schema ({
-    name: {
-        type: String,
-        required: true
-    },
-    phone: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true
-    },
-    active: {
-        type: Boolean,
-        required: true
-    }
-
+const mongoose = require("mongoose");
+const customer = new mongoose.Schema({
+    name: String,
+    email: String,
+    mobile: String,
+    business: String,
+    file: String,
+    confirmPassword: String,
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+      }
 })
 
-module.exports = mongoose.model('Alien',  alienSchema)
+module.exports = mongoose.model("Customer", customer); 

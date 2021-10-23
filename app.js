@@ -19,6 +19,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req }) => ({ req, pubsub })
+
 });
 
 const app = express();

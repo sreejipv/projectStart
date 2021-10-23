@@ -31,14 +31,15 @@ const AuthState = (props) => {
     const [state, dispatch] = useReducer(authReducer, initialState);
 
     const loadUser = async () => {
-        console.log('authData', authData)
         try {
             dispatch({
                 type: USER_LOADED,
                 payload: authData
             })
+            console.log('kjkjkjk');
+            console.log(authData);
         } catch (error) {
-            console.log('kjkjkjk')
+
             dispatch({type: AUTH_ERROR, payload: error})
         }
     }

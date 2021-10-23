@@ -43,6 +43,15 @@ export const SIGN_UP = gql`
   }
 `;
 
+
+export const ADD_CUSTOMER = gql`
+  mutation($input: CustomerInput!) {
+    addCustomer(customerInput: $input) {
+      name
+    }
+  }
+`;
+
 export const LOG_IN = gql`
   mutation($email: String!, $password: String!) {
     login(email:$email , password:$password ) {

@@ -1,32 +1,31 @@
 import React, {useContext, useEffect} from 'react';
-import PropTypes from 'prop-types';
-import { Button } from '@material-ui/core';
-import AuthContext from "../../Context/auth/authContext";
-import * as Routes from '../../routes'
-import {useHistory} from 'react-router-dom'
+import { Box, makeStyles } from '@material-ui/core';
+
 import { GET_AUTH_USER } from '../../graphql/user';
 import { useQuery } from '@apollo/react-hooks';
-import SignOut from "../../Components/SignOut";
-import Profile from '../../Components/Profile'
+import Drawer from '@material-ui/core/Drawer';
 
+import NavBar from '../../Components/NavBar/NavBar';
+
+
+const drawerWidth = 250;
+
+const useStyles = makeStyles({
+  dashboard: {
+    width: `calc(100% - ${drawerWidth}px)`,
+  },
+})
 const HomeApp = (props) => {
-
-  // const { loading , data: {authUser} } = useQuery(GET_AUTH_USER); 
+  const classes = useStyles();
+  
   const { loading,loadUser, error, data: authData } = useQuery(GET_AUTH_USER); 
-  console.log(authData);
-  // const history = useHistory()
-
-  useEffect(() => {
-    // loadUser();
-    // eslint-disable-next-line
-  }, []);
-  console.log(authData);
 
     return (
-        <div>
-            <Profile user={authData}/>
-            <SignOut/>
-        </div>
+        <Box display="flex">
+            <NavBar/>
+            <Box className={classes.dashboard}>  
+            </Box>
+        </Box>
     );
 };
 

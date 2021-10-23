@@ -6,6 +6,12 @@ export const HOME = '/home';
 
 export const LANDING = '/';
 
+export const CUSTOMERS = '/customers';
+
+export const TEAM = '/team';
+
+export const EDIT_PROFILE = '/edit-profile';
+
 export const RESET_PASSWORD = '/reset-password';
 
 export const FORGOT_PASSWORD = '/forgot-password';

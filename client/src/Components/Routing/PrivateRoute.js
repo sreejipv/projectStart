@@ -17,7 +17,8 @@ const PrivateRoute = ({component: Component, ...rest}) => {
         <Route 
         {...rest}
             render={(props)=>
-                loading ? (<Spinner />) : authData ? (<Component {...props} />) : (<Redirect to="/" />)}
+                loading ? (<Spinner />) : authData ? (<Component {...props} />) : (<Component {...props} />)}
+                // loading ? (<Spinner />) : authData ? (<Component {...props} />) : (<Redirect to="/" />)}
         />
     )
 }

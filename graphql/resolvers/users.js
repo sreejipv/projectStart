@@ -24,25 +24,21 @@ function generateToken(user) {
   );
 }
 
+
+
 module.exports = {
   Query: {
     async getAuthUser (_, { body }, context) {
-      console.log('user')
       // if (!authUser) return null;
   
       // If user is authenticated, update it's isOnline field to true
       const user = checkAuth(context)
-      console.log(user)
   
       return user;
-    },
-    testMe() {
-      return true
     }
   },
   Mutation: {
     uploadFile: async (parent, {file}) => {
-      console.log('oyeee')
      
         const {createReadStream, filename, mimetype, encoding} =  await file
 
@@ -91,7 +87,7 @@ module.exports = {
       };
     },
 
-    async updateUser(
+  async updateUser(
       _,{updateUserInput: {business}},context
     ){
       const { valid, errors } = validateUserUpdateInput(

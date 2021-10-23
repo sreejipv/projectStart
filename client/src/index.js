@@ -48,11 +48,6 @@ const errorLink = onError(({ graphqlErrors, networkError }) => {
   }
 });
 
-// const client = new ApolloClient({
-//   uri: 'http://localhost:4000',// or your graphql server uri
-//   cache: new InMemoryCache()
-
-// });
 
 const client = new ApolloClient({
   link: errorLink.concat(authLink.concat(httpLink)),
@@ -66,7 +61,6 @@ ReactDOM.render(
   <React.StrictMode>
        <ApolloProvider client={client}>
         <App />
-
        </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')

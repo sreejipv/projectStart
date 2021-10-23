@@ -16,6 +16,21 @@ module.exports = gql`
     business: String!
     createdAt: String!
   }
+  type Customer {
+    email: String!
+    name: String!
+    mobile: String!
+    createdAt: String!
+    author: User!
+  }
+
+  input CustomerInput {
+    name: String!
+    email: String!
+    mobile: String!
+    business: String!
+  }
+
   input RegisterInput {
     name: String!
     password: String!
@@ -38,6 +53,8 @@ module.exports = gql`
     uploads: [File]
     getPosts: [Post]
     me: User
+    getUsers: [User]
+    getCustomers: [Customer]
     getAuthUser: User
     testMe: Boolean!
   }
@@ -46,6 +63,7 @@ module.exports = gql`
   type Mutation {
     uploadFile(file: Upload!): File!
     register(registerInput: RegisterInput): User!
+    addCustomer(customerInput: CustomerInput ): Customer!
     updateUser(updateUserInput: UpdateUserInput): User!
     login(email: String!, password: String!): User!
   }

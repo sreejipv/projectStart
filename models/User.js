@@ -5,8 +5,8 @@ const user = new mongoose.Schema({
     mobile: String,
     business: String,
     password: String,
-    file: String,
-    confirmPassword: String
+    confirmPassword: String,
+    role: String,
 })
 
 module.exports = mongoose.model("User", user); 
