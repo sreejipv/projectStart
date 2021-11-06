@@ -1,16 +1,5 @@
 import gql from "graphql-tag";
 
-
-/**
- * Records to select from user
- */
-const userPayload = `
-  id
-  username
-  email
-  createdAt
-`;
-
 /**
  * Gets authenticated user
  */
@@ -43,14 +32,6 @@ export const SIGN_UP = gql`
   }
 `;
 
-
-export const ADD_CUSTOMER = gql`
-  mutation($input: CustomerInput!) {
-    addCustomer(customerInput: $input) {
-      name
-    }
-  }
-`;
 
 export const LOG_IN = gql`
   mutation($email: String!, $password: String!) {

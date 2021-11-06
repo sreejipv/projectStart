@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
-import Collapse from "@material-ui/core/Collapse";
-import IconButton from "@material-ui/core/IconButton";
+import { useQuery } from '@apollo/client';
+import { GET_CUSTOMERS } from "../../graphql/customer";
+
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -20,19 +20,7 @@ const useRowStyles = makeStyles({
   },
 });
 
-function createData(customer, Phone, email, tags, action, notes) {
-  return {
-    customer,
-    Phone,
-    email,
-    tags,
-    action,
-    notes: [
-      { date: "2020-01-05", customerId: "11091700", amount: 3 },
-      { date: "2020-01-02", customerId: "Anonymous", amount: 1 },
-    ],
-  };
-}
+
 
 function Row(props) {
   const { row } = props;
@@ -42,13 +30,10 @@ function Row(props) {
   return (
     <React.Fragment>
       <TableRow hover style={{cursor: 'pointer'}} className={classes.root}>
-       
-     
-
         <TableCell cursor="pointer" component="th" scope="row">
-          {row.customer}
+          {row.name}
         </TableCell>
-        <TableCell align="left">{row.Phone}</TableCell>
+        <TableCell align="left">{row.mobile}</TableCell>
         <TableCell align="left">{row.email}</TableCell>
         <TableCell align="left">{row.tags}</TableCell>
         <TableCell align="left">{row.action}</TableCell>
@@ -58,33 +43,12 @@ function Row(props) {
   );
 }
 
-Row.propTypes = {
-  row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
-      PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
-  }).isRequired,
-};
-
-const rows = [
-  createData("Bill Gates", 999999999, "billgates@kallanmar.com", "Call"),
-  createData("Bill Gates", 999999999, "billgates@kallanmar.com", "Call"),
-  createData("Bill Gates", 999999999, "billgates@kallanmar.com", "Call"),
-  createData("Bill Gates", 999999999, "billgates@kallanmar.com", "Call"),
-  createData("Bill Gates", 999999999, "billgates@kallanmar.com", "Call"),
-];
 
 export default function CustomerTable() {
+  const { data, error, loading } = useQuery(GET_CUSTOMERS); 
+  console.log(data, 'data')
+
+  const customers = data && data.getCustomers 
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -99,9 +63,8 @@ export default function CustomerTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name} row={row} />
-          ))}
+        {/* <Row  row={} /> */}
+          {customers && customers.map((customer)=><Row  row={customer} />)}
         </TableBody>
       </Table>
     </TableContainer>

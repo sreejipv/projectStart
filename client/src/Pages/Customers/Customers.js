@@ -11,7 +11,7 @@ import Hidden from "@material-ui/core/Hidden";
 import AuthContext from "../../Context/auth/authContext";
 import MainLayout from "../../Layout/MainLayout";
 import NavBar from "../../Components/NavBar/NavBar";
-import CustomerTable from "../../Components/Customers/Table";
+import CustomerTable from "../../Components/Customers/CustomerTable";
 import NewCustomer from "../../Components/Customers/NewCustomer";
 import TableMobile from "../../Components/Customers/TableMobile";
 

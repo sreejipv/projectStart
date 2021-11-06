@@ -2,8 +2,6 @@ import React , { useReducer } from "react"
 import AuthContext from "./authContext";
 import { useQuery, useMutation } from '@apollo/client';
 import {
-    REGISTER_SUCCESS,
-    REGISTER_FAIL,
     USER_LOADED,
     AUTH_ERROR,
     LOGIN_SUCCESS,
@@ -36,8 +34,6 @@ const AuthState = (props) => {
                 type: USER_LOADED,
                 payload: authData
             })
-            console.log('kjkjkjk');
-            console.log(authData);
         } catch (error) {
 
             dispatch({type: AUTH_ERROR, payload: error})
@@ -52,14 +48,12 @@ const AuthState = (props) => {
         try{
             // signin({variables: formData });
             const response = await signin({variables: formData})
-            console.log(response.data.login);
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: response.data.login
             })
             loadUser();
         } catch(error) {
-            console.log(error);
             dispatch({
                 type: LOGIN_FAIL,
                 payload: error

@@ -19,7 +19,7 @@ import {
             }
         case LOGIN_SUCCESS:
             localStorage.setItem("token", action.payload.token);
-            console.log('success',  action.payload.token)
+            console.log('success',  action.payload)
             return{
                 ...state,
                 ...action.payload,

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Button, makeStyles, Typography } from "@material-ui/core";
-import { ADD_CUSTOMER, GET_AUTH_USER } from "../../graphql/user";
+import { GET_AUTH_USER } from "../../graphql/user";
+import { ADD_CUSTOMER } from '../../graphql/customer'
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import TextField from "@material-ui/core/TextField";
@@ -17,10 +18,9 @@ const NewCustomer = ({handleModal}) => {
   const classes = useStyles();
   const [checked, setChecked] = React.useState(true);
 
-  const [addCustomer, { error: customerError, data: customerData }] =
-    useMutation(ADD_CUSTOMER);
+  const [addCustomer, { error: customerError, data: customerData }] = useMutation(ADD_CUSTOMER);
 
-  // const { name, email, phone, tags, } = values;
+  const { name, email, phone } = values;
 
     // // console.log(email);
     // function changeHandler(e) {
@@ -36,8 +36,6 @@ const NewCustomer = ({handleModal}) => {
             name: "ramasasan",
             email: "kmmmmmmoo@gmail.com",
             mobile: "9898989898",
-            business: "qweqwe123",
-            author: "qweqwe123",
           },
         },
       });
@@ -51,6 +49,10 @@ const NewCustomer = ({handleModal}) => {
     }
   };
 
+  function changeHandler(e) {
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
+  }
 
   return (
     <Box position="absolute" 
@@ -79,6 +81,7 @@ const NewCustomer = ({handleModal}) => {
                 value=""
                 variant="outlined"
                 placeholder="John Smith"
+                onChange={(e)=>changeHandler(e)}
               />
             </Box>
 
@@ -91,6 +94,7 @@ const NewCustomer = ({handleModal}) => {
                   id="Email"
                   variant="outlined"
                   placeholder="John Smith"
+                  onChange={(e)=>changeHandler(e)}
                 />
               </Box>
               <Box pl={3} />
@@ -101,6 +105,7 @@ const NewCustomer = ({handleModal}) => {
                   id="phone"
                   variant="outlined"
                   placeholder="Eg: 9496326525"
+                  onChange={(e)=>changeHandler(e)}
                 />
               </Box>
             </Box>
