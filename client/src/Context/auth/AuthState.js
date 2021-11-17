@@ -44,9 +44,7 @@ const AuthState = (props) => {
         dispatch({type: LOGOUT})
     }
     const login = async (formData) => {
-        console.log(formData);
         try{
-            // signin({variables: formData });
             const response = await signin({variables: formData})
             dispatch({
                 type: LOGIN_SUCCESS,

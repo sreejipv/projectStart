@@ -1,135 +1,165 @@
-import React from 'react';
-import { Box, Button, makeStyles, Typography } from "@material-ui/core";
-import { GET_AUTH_USER } from "../../graphql/user";
-import { ADD_CUSTOMER } from '../../graphql/customer'
-import { useQuery, useMutation } from "@apollo/react-hooks";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import React, { useState } from "react";
+import { Box, Button, makeStyles } from "@material-ui/core";
+import { ADD_CUSTOMER, GET_CUSTOMERS } from "../../graphql/customer";
+import { useMutation } from "@apollo/react-hooks";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
-
+import { isRequired } from "../../Utility/Form";
 
 const useStyles = makeStyles({
   dashboard: {
-    maxWidth: '1020px'
-  }
+    maxWidth: "1020px",
+  },
 });
 
-const NewCustomer = ({handleModal}) => {
+const NewCustomer = ({ handleModal }) => {
   const classes = useStyles();
-  const [checked, setChecked] = React.useState(true);
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
+  const [isSubmit, setIsSubmit] = useState(false)
 
-  const [addCustomer, { error: customerError, data: customerData }] = useMutation(ADD_CUSTOMER);
+  const [addCustomer, { data, loading, error }] =
+    useMutation(ADD_CUSTOMER,{
+      refetchQueries: [{query: GET_CUSTOMERS }
+      ],
+    });
 
-  const { name, email, phone } = values;
-
-    // // console.log(email);
-    // function changeHandler(e) {
-    //   const { name, value } = e.target;
-    //   setValues({ ...values, [name]: value });
-    // }
-
-  const handleSubmit = async () => {
-    try {
-      const response = await addCustomer({
-        variables: {
-          input: {
-            name: "ramasasan",
-            email: "kmmmmmmoo@gmail.com",
-            mobile: "9898989898",
-          },
-        },
-      });
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-      if (error) {
-        alert("im wrong");
-      }
-
-    }
-  };
+  const { name, email, phone, business } = values;
 
   function changeHandler(e) {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   }
 
+  const handleSubmit = async (e) => {
+    setIsSubmit(true)
+    e.preventDefault();
+    if(!isRequired(name) || !isRequired(email) || !isRequired(phone)){
+      try {
+        const response = await addCustomer({
+          variables: {
+            input: {
+              name: name,
+              email: email,
+              mobile: phone,
+              business: business,
+            },
+          },
+          
+        },handleModal());
+      } catch (error) {
+        console.log(error);
+        if (error) {
+          alert("im wrong");
+        }
+      }
+    }
+     
+
+  };
+  console.log(data);
+
   return (
-    <Box position="absolute" 
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        width="100%"
-        left="0"
-        right="0"
-        bottom="0"
-        top="0"
-        zIndex="9999"
-        bgcolor="rgb(255 255 255 / 89%)"
-        >
-      <Box width="100%"
+    <Box
+      position="absolute"
+      display="flex"
+      flexDirection="column"
       justifyContent="center"
-        display="flex">
-      <Paper elevation={1} className={classes.paper}>
-        <Box maxWidth="700px" p={4} mb={3}>
-          <form className={classes.root} noValidate autoComplete="off">
-            <Box width="100%" display="flex" flexDirection="column">
-              <Box pb={2}>Name</Box>
-              <TextField
-                size="small"
-                id="Name"
-                value=""
-                variant="outlined"
-                placeholder="John Smith"
-                onChange={(e)=>changeHandler(e)}
-              />
-            </Box>
-
-            <Box pb={3} />
-            <Box display="flex">
-              <Box width="50%" display="flex" flexDirection="column">
-                <Box pb={2}>Email</Box>
+      width="100%"
+      left="0"
+      right="0"
+      bottom="0"
+      top="0"
+      zIndex="9999"
+      bgcolor="rgb(255 255 255 / 89%)"
+    >
+      <Box width="100%" justifyContent="center" display="flex">
+        <Paper elevation={1} className={classes.paper}>
+          <Box maxWidth="700px" p={4} mb={3}>
+            <form className={classes.root} noValidate autoComplete="off">
+               
+              <Box width="100%" display="flex" flexDirection="column">
                 <TextField
+                required
                   size="small"
-                  id="Email"
-                  variant="outlined"
-                  placeholder="John Smith"
-                  onChange={(e)=>changeHandler(e)}
+                  value={name}
+                  name="name"
+                  label="Name"
+                  variant="standard"
+                  error={isSubmit && (name === '')}
+                  
+                  onChange={(e) => changeHandler(e)}
                 />
               </Box>
-              <Box pl={3} />
-              <Box width="50%" display="flex" flexDirection="column">
-                <Box pb={2}>Phone</Box>
+
+              <Box pb={3} />
+              <Box width="100%" display="flex" flexDirection="column">
                 <TextField
+                required
                   size="small"
-                  id="phone"
-                  variant="outlined"
-                  placeholder="Eg: 9496326525"
-                  onChange={(e)=>changeHandler(e)}
+                  value={email}
+                  name="email"
+                  label="Email"
+                  variant="standard"
+                  onChange={(e) => changeHandler(e)}
                 />
               </Box>
-            </Box>
-            <Box pt={3} />
+              <Box pt={3} />
 
-            <Box display="flex" justifyContent="flex-end">
-              <Button variant="outlined" onClick={()=>{handleModal('test')}} color="primary">
-                Cancel
-              </Button>
-              <Box pl={3} />
-              <Button
-                variant="contained"
-                onClick={handleSubmit}
-                color="primary"
-              >
-                Add Customer
-              </Button>
-            </Box>
-          </form>
-        </Box>
-      </Paper>
+              <Box display="flex">
+                <Box width="50%" display="flex" flexDirection="column">
+                  <TextField
+                  required
+                    size="small"
+                    name="business"
+                    value={business}
+                    label="Business"
+                    variant="standard"
+                    onChange={(e) => changeHandler(e)}
+                  />
+                </Box>
+                <Box pl={3} />
+                <Box width="50%" display="flex" flexDirection="column">
+                  <TextField
+                    size="small"
+                    name="phone"
+                    label="Phone"
+                    variant="standard"
+                    onChange={(e) => changeHandler(e)}
+                  />
+                </Box>
+              </Box>
+              <Box pt={3} />
+
+              <Box display="flex" justifyContent="flex-end">
+                <Button
+                  variant="outlined"
+                  onClick={() => {
+                    handleModal("test");
+                  }}
+                  color="primary"
+                >
+                  Cancel
+                </Button>
+                <Box pl={3} />
+                <Button
+                  variant="contained"
+                  type="submit"
+
+                  onClick={(e)=>handleSubmit(e)}
+                  color="primary"
+                >
+                  Add Customer
+                </Button>
+              </Box>
+            </form>
+          </Box>
+        </Paper>
       </Box>
     </Box>
-
   );
 };
 

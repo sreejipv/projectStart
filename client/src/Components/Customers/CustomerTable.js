@@ -47,7 +47,6 @@ function Row(props) {
 export default function CustomerTable() {
   const { data, error, loading } = useQuery(GET_CUSTOMERS); 
   console.log(data, 'data')
-
   const customers = data && data.getCustomers 
   return (
     <TableContainer component={Paper}>

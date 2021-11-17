@@ -10,7 +10,6 @@ import * as Routes from '../../routes';
 
 import AuthContext from "../../Context/auth/authContext";
 
-// import { userContext } from '../../Context/userContext';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,30 +43,6 @@ function SignIn(props) {
     const handleSubmit = async(e) => {
       e.preventDefault();
       login({email: email,password: password});
-
-      // if(email === "" || password === "") {
-      //   alert('fill it bitchh');
-      // }else {
-      //   login({email: email,password: password});
-      // }
-      // try{
-      //   const response = await signin({variables: {email: "koqqqqq@gmail.com",password: "qweqwe123"}})
-      //   // const response = await signup({variables: {input: {name: "ramasasan",
-      //   // email: "koqqqqq@gmail.com",
-      //   // mobile: "9898989898",
-      //   // password: "qweqwe123",
-      //   // confirmPassword: "qweqwe123"}}});
-      //   localStorage.setItem("token", response.data.login.token)
-      //   // setUser(response.data.login.token)
-
-      //   console.log(response);
-      // } catch(error) {
-      //     console.log(error);
-      //   // if(error){
-      //   //   console.log(error.graphQLErrors[0].message)
-      //   // }
-        
-      // }
     };
 
     const { email, password } = values;
